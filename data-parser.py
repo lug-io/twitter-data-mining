@@ -75,3 +75,29 @@ tweets['csharp']		= tweets['text'].apply(lambda tweet: word_in_text('csharp', tw
 tweets['fsharp']		= tweets['text'].apply(lambda tweet: word_in_text('fsharp', tweet))
 
 ## Calculate # of tweets for each language
+print tweets['python'].value_counts()[True]
+print tweets['javascript'].value_counts()[True]
+print tweets['ruby'].value_counts()[True]
+print tweets['csharp'].value_counts()[True]
+print tweets['fsharp'].value_counts()[True]
+
+## Create a simple comparison chart
+prg_langs = ['python', 'javascript', 'ruby', 'csharp', 'fsharp']
+tweets_by_prg_lang = [	tweets['python'].value_counts()[True],
+						tweets['javascript'].value_counts()[True],
+						tweets['ruby'].value_counts()[True],
+						tweets['csharp'].value_counts()[True],
+						tweets['fsharp'].value_counts()[True]]
+
+x_pos = list(range(len(prg_langs)))
+width = 0.8
+fig, ax = plt.subplots()
+plt.bar(x_pos, tweets_by_prg_lang, width, alpha=1, color='g')
+
+# Settings axis labels and ticks
+ax.set_ylabel('Number of tweets', fontsize=15)
+ax.set_title('Ranking: python, vs. javascript vs. ruby vs. csharp vs. fsharp (Raw data', fontsize=10, fontweight='bold')
+ax.set_xticks([p + 0.4 * width for p in x_pos])
+ax.set_xticklabels(prg_langs)
+plt.grid()
+plt.show()	
