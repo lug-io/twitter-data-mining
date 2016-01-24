@@ -112,5 +112,50 @@ print tweets['programming'].value_counts()[True]
 print tweets['tutorial'].value_counts()[True]
 print tweets['relevant'].value_counts()[True]
 
+## Compare the popularity of the programming languages
+print tweets[tweets['relevant'] == True]['python'].value_counts()[True]
+print tweets[tweets['relevant'] == True]['javascript'].value_counts()[True]
+print tweets[tweets['relevant'] == True]['ruby'].value_counts()[True]
+print tweets[tweets['relevant'] == True]['csharp'].value_counts()[True]
+print tweets[tweets['relevant'] == True]['fsharp'].value_counts()[True]
+
+tweets_by_prg_lang = [tweets[tweets['relevant'] == True]['python'].value_counts()[True], 
+                      tweets[tweets['relevant'] == True]['javascript'].value_counts()[True], 
+                      tweets[tweets['relevant'] == True]['ruby'].value_counts()[True],
+                      tweets[tweets['relevant'] == True]['csharp'].value_counts()[True],
+                      tweets[tweets['relevant'] == True]['fsharp'].value_counts()[True]]
+x_pos = list(range(len(prg_langs)))
+width = 0.8
+fig, ax = plt.subplots()
+plt.bar(x_pos, tweets_by_prg_lang, width,alpha=1,color='g')
+ax.set_ylabel('Number of tweets', fontsize=15)
+ax.set_title('Ranking: python vs. javascript vs. ruby (Relevant data)', fontsize=10, fontweight='bold')
+ax.set_xticks([p + 0.4 * width for p in x_pos])
+ax.set_xticklabels(prg_langs)
+plt.grid()
+
+## Extract links from tweets
+## http:// and https://
+def extract_link(text):
+	regex = r'https?://[^\s<>"]+|www\.[^\s<>"]+'
+	match = re.search(regex, text)
+	if match:
+		return match.group()
+	return ''
+
+## Add a column that includes links
+tweets['link'] = tweets['text'].apply(lambda tweet: extract_link(tweet))
+
+## New DataFrame: subset of tweets that contain links
+tweets_relevant = tweets[tweets['relevant'] == True]
+tweets_relevant_with_link = tweets_relevant[tweets_relevant['link'] != '']
+
+## Print links
+print tweets_relevant_with_link[tweets_relevant_with_link['python'] == True]['link']
+print tweets_relevant_with_link[tweets_relevant_with_link['javascript'] == True]['link']
+print tweets_relevant_with_link[tweets_relevant_with_link['ruby'] == True]['link']
+print tweets_relevant_with_link[tweets_relevant_with_link['csharp'] == True]['link']
+print tweets_relevant_with_link[tweets_relevant_with_link['fsharp'] == True]['link']
+
 ## Show all of our grids ;)
 plt.show()	
