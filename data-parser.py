@@ -100,4 +100,17 @@ ax.set_title('Ranking: python, vs. javascript vs. ruby vs. csharp vs. fsharp (Ra
 ax.set_xticks([p + 0.4 * width for p in x_pos])
 ax.set_xticklabels(prg_langs)
 plt.grid()
+
+## Targeting relevant tweets
+tweets['programming'] 	= tweets['text'].apply(lambda tweet: word_in_text('programming', tweet))
+tweets['tutorial']		= tweets['text'].apply(lambda tweet: word_in_text('tutorial', tweet))
+
+##
+tweets['relevant']		= tweets['text'].apply(lambda tweet: word_in_text('programming', tweet) or word_in_text('tutorial', tweet))
+
+print tweets['programming'].value_counts()[True]
+print tweets['tutorial'].value_counts()[True]
+print tweets['relevant'].value_counts()[True]
+
+## Show all of our grids ;)
 plt.show()	
