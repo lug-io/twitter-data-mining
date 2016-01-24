@@ -1,6 +1,7 @@
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
+import re # Regular Expression
 from matplotlib import rcParams
 
 # Set matplot settings
@@ -56,3 +57,21 @@ ax.set_title('Top 5 Countries', fontsize=15, fontweight='bold')
 tweets_by_country[:5].plot(ax=ax, kind='bar', color='blue')
 
 fig.savefig('top-5-countries.png')
+
+# Returns true if "word" is in "text"
+def word_in_text(word, text):
+	word = word.lower()
+	text = text.lower()
+	match = re.search(word, text)
+	if match:
+		return True
+	return False
+
+# Add columns to our tweets DataFrame
+tweets['python']     	= tweets['text'].apply(lambda tweet: word_in_text('python', tweet))
+tweets['javascript'] 	= tweets['text'].apply(lambda tweet: word_in_text('javascript', tweet))
+tweets['ruby']			= tweets['text'].apply(lambda tweet: word_in_text('ruby', tweet))
+tweets['csharp']		= tweets['text'].apply(lambda tweet: word_in_text('csharp', tweet))
+tweets['fsharp']		= tweets['text'].apply(lambda tweet: word_in_text('fsharp', tweet))
+
+## Calculate # of tweets for each language
