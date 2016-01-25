@@ -1,8 +1,18 @@
+#!/usr/bin/python
+import sys
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
 import re # Regular Expression
 from matplotlib import rcParams
+
+## Use system to parse command line arguments
+print 'Number of arguments:', len(sys.argv), 'arguments.'
+print 'Argument List:', str(sys.argv)
+
+# Path to image output directory
+input_directory = '/var/www/html/content/data/'
+output_directory = '/var/www/html/content/graphs/'
 
 # Set matplot settings
 rcParams.update({'figure.autolayout': True})
@@ -10,7 +20,7 @@ rcParams.update({'figure.autolayout': True})
 #plt.gca().tight_layout() # gca -> GetCurrentAxis
 
 # Set target file
-tweets_data_path = 'data.txt'
+tweets_data_path = input_directory + '1-24-2016.txt'
 
 tweets_data = []
 tweets_file = open(tweets_data_path, "r")
@@ -43,7 +53,7 @@ ax.set_ylabel('Number of tweets', fontsize=15)
 ax.set_title('Top 5 Languages', fontsize=15, fontweight='bold')
 tweets_by_lang[:5].plot(ax=ax, kind='bar', color='red')
 
-fig.savefig('top-5-languages.png')
+fig.savefig(output_directory + 'top-5-languageszz.png')
 
 ## Chart for top 5 countries
 tweets_by_country = tweets['country'].value_counts()
@@ -56,7 +66,7 @@ ax.set_ylabel('Number of tweets', fontsize=15)
 ax.set_title('Top 5 Countries', fontsize=15, fontweight='bold')
 tweets_by_country[:5].plot(ax=ax, kind='bar', color='blue')
 
-fig.savefig('top-5-countries.png')
+fig.savefig(output_directory + 'top-5-countrieszz.png')
 
 # Returns true if "word" is in "text"
 def word_in_text(word, text):
@@ -117,7 +127,7 @@ print tweets[tweets['relevant'] == True]['python'].value_counts()[True]
 print tweets[tweets['relevant'] == True]['javascript'].value_counts()[True]
 print tweets[tweets['relevant'] == True]['ruby'].value_counts()[True]
 print tweets[tweets['relevant'] == True]['csharp'].value_counts()[True]
-print tweets[tweets['relevant'] == True]['fsharp'].value_counts()[True]
+#print tweets[tweets['relevant'] == True]['fsharp'].value_counts()[True]
 
 tweets_by_prg_lang = [tweets[tweets['relevant'] == True]['python'].value_counts()[True], 
                       tweets[tweets['relevant'] == True]['javascript'].value_counts()[True], 
@@ -158,4 +168,4 @@ print tweets_relevant_with_link[tweets_relevant_with_link['csharp'] == True]['li
 print tweets_relevant_with_link[tweets_relevant_with_link['fsharp'] == True]['link']
 
 ## Show all of our grids ;)
-plt.show()	
+##plt.show()	
