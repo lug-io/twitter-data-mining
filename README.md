@@ -19,6 +19,19 @@
 - `python data-parser.py`
 	- Uses output.txt to generate relevant charts in root folder
 
-### Sources
+### After following "Remote Hosting" Instructions
+
+- `screen -S [name]`
+	- Start new session with [name]
+- `screen -ls`
+	- List active sessions
+- `screen -r [name]`
+	- Attach running session to [name]
+- `screen -X -S [session # to kill] kill`
+	- Kill a screen session
+- `CTRL + a, d`
+	- Detach from active screen
+
+## Sources
 - This wonderful [blog post](http://adilmoujahid.com/posts/2014/07/twitter-analytics/) by [Adil Moujahid](https://twitter.com/AdilMouja)
 - Publishing [Python to Digital Ocean](https://nikolak.com/deploying-python-code-to-vps/) by [Nikola Kovacevic](https://github.com/Nikola-K)
