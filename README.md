@@ -39,6 +39,16 @@ These instructions are for a Digital Ocean droplet running Ubuntu 14.04.
 	- `pip install matplotlab`
 		- Install [these](http://stackoverflow.com/questions/25674612/ubuntu-14-04-pip-cannot-upgrade-matplotllib) first
 
+- `sudo nano /var/mail/root`
+	- Shows emails from CRON to `root` user
+	- Requires postfix be installed (e-mail)
+- `sudo grep CRON /var/log/syslog`
+	- Shows system logs specific to cron
+- `sudo crontab -e`
+	- Access root's cron list
+	- Make sure target scripts are chmod +x for execution
+
+
 ### Hosted Server (Docker)
 
 To come at a later date.
