@@ -31,6 +31,6 @@ echo -e "${RED}$OUTPUTFILENAME${NC}"
 ## Start screen
 echo -e "\n${GRN}~~ Start data-mining screen${NC}"
 screen -d -m -S data-miner
-screen -S data-miner -X stuff "python twitter-streaming.py > $OUTPUTFILENAME"$(echo -ne '\015')
+screen -S data-miner -X stuff "python /var/www/cmd/twitter-streaming.py > $OUTPUTFILENAME"$(echo -ne '\015')
 screen -ls
 echo -e '\n'
