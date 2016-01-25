@@ -28,8 +28,9 @@ These instructions are for a Digital Ocean droplet running Ubuntu 14.04.
 1. [Creating droplet and setting up Python](https://nikolak.com/deploying-python-code-to-vps/)
 2. [Recommended Server Setup w/ Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-14-04)
 	- [How to create/use SSH Keys](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-putty-on-digitalocean-droplets-windows-users)
-2. [How to install Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04)
-3. Installing our script's dependencies
+3. [How to install Linux, Apache, MySQL, PHP (LAMP) stack on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04)
+4. [Installing (and securing) PHPMyAdmin](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-12-04)
+5. Installing our script's dependencies
 	- `pip install pandas`
 		- Install [Setup Tools](http://stackoverflow.com/questions/8650459/how-to-get-setuptools-and-easy-install)
 		- Install [Numpy](http://stackoverflow.com/questions/13061379/error-of-install-numpy-on-linux-red-hat)
@@ -51,6 +52,9 @@ To come at a later date.
 	- Pipe twitter data to an output file
 - `python data-parser.py`
 	- Uses output.txt to generate relevant charts in root folder
+
+	sudo sh -c 'python twitter-streaming.py > /var/www/html/content/data/1-24-2016.txt'
+
 
 ### Running Data Mining in the Background
 
