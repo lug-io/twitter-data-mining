@@ -32,6 +32,12 @@ rcParams.update({'figure.autolayout': True})
 tweets_data_path = input_directory + '20160126.txt'
 print tweets_data_path
 
+def mapToTweet(tweet):
+	newTweet = {}
+	newTweet['text'] = tweet.get('text', None)
+	newTweet['lang'] = tweet.get('lang', None)
+	newTweet['country'] = None if tweet.get('place', None) is None else tweet.get('place', {}).get('country')
+	return newTweet
 
 tweets_data = []
 with open(tweets_data_path) as f:
@@ -44,6 +50,7 @@ with open(tweets_data_path) as f:
 				continue
 			## Load tweets into array
 			tweet = json.loads(line)
+			tweet = mapToTweet(tweet)
 			tweets_data.append(tweet)
 		except Exception as e:
 			print e
@@ -56,9 +63,11 @@ print "decoded tweets: ", len(tweets_data)
 tweets = pd.DataFrame()
 
 ## Populate/map DataFrame with data
-tweets['text']		= map(lambda tweet: tweet['text'], tweets_data)
-tweets['lang']		= map(lambda tweet: tweet['lang'], tweets_data)
-tweets['country']	= map(lambda tweet: tweet['place']['country'] if tweet['place'] != None else None, tweets_data)
+## tweet.get('text', None) ~= tweet['text'] ?? None
+tweets['text'] 		= map(lambda tweet: tweet.get('text', None), tweets_data)
+tweets['lang'] 		= map(lambda tweet: tweet.get('lang', None), tweets_data)
+tweets['country']   = map(lambda tweet: tweet.get('country', None), tweets_data)
+#tweets['country'] 	= map(lambda tweet: None if tweet.get('place', None) is None else tweet.get('place', {}).get('country'), tweets_data)
 
 ## Chart for top 5 languages
 tweets_by_lang = tweets['lang'].value_counts()
