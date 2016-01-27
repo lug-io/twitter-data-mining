@@ -38,8 +38,16 @@ class StdOutListener(StreamListener):
 
         return True
 
+    def close(self):
+        try:
+            self.fh.close()
+        except:
+            # Log
+            pass
+
     def on_error(self, status):
         print status
+        self.errorCount += 1
 
 
 if __name__ == '__main__':
