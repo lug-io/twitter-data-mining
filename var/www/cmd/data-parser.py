@@ -8,8 +8,10 @@ from matplotlib import rcParams
 import traceback
 from datetime import datetime
 
-## Lambda, Reduce, Filter, Map: http://www.python-course.eu/lambda.php
-## DateTime: http://stackoverflow.com/questions/415511/how-to-get-current-time-in-python
+# Lambda, Reduce, Filter, Map: http://www.python-course.eu/lambda.php
+# DateTime: http://stackoverflow.com/questions/415511/how-to-get-current-time-in-python
+# List Comprehension: http://stackoverflow.com/questions/16341775/what-is-the-advantage-of-a-list-comprehension-over-a-for-loop
+
 
 ## Use system to parse command line arguments
 #print 'Number of arguments:', len(sys.argv), 'arguments.'
@@ -32,8 +34,16 @@ rcParams.update({'figure.autolayout': True})
 tweets_data_path = input_directory + '20160126.txt'
 print tweets_data_path
 
-def mapToTweet(tweet):
+def mapToTweet(data):
 	newTweet = {}
+	newTweet['text'] = None
+	newTweet['lang'] = None
+	newTweet['country'] = None
+	try:
+		tweet = json.loads(line)
+	except Exception as e:
+		print e
+		return newTweet
 	newTweet['text'] = tweet.get('text', None)
 	newTweet['lang'] = tweet.get('lang', None)
 	newTweet['country'] = None if tweet.get('place', None) is None else tweet.get('place', {}).get('country')
@@ -41,24 +51,9 @@ def mapToTweet(tweet):
 
 tweets_data = []
 with open(tweets_data_path) as f:
-	for i, line in enumerate(f):
-		if i % 1000 == 0:
-			print "line check: ", str(i)
-		line = line.strip() # removes trailing/starting whitespace
-		# skipping empty lines
-		if not len(line):
-			continue
-		try:
-			## Load tweets into array
-			tweet = json.loads(line)
-			tweet = mapToTweet(tweet)
-			tweets_data.append(tweet)
-		except MemoryError as e:
-			print "Run out of memory, bye."
-			raise e
-		except Exception as e:
-			print e
-			continue
+	tweets_data =	[mapToTweet(line)
+					for line in f
+					if len(line.strip())]
 
 ## Total # of tweets captured
 print "decoded tweets: ", len(tweets_data)
