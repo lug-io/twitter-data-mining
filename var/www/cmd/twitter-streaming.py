@@ -27,8 +27,15 @@ class StdOutListener(StreamListener):
         self.filename = d.strftime("%H.txt")
         self.fh = open(self.output_directory + self.filename, "a")
 
+        self.tweetCount = 0
+        self.errorCount = 0
+        self.last = datetime.now()
+
+    # Called for every new tweet on stream
     def on_data(self, data):
-        print data
+        self.fh.write(data)
+        self.tweetCount += 1
+
         return True
 
     def on_error(self, status):
