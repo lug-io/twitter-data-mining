@@ -3,6 +3,7 @@
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
+from datetime import datetime
 
 #Variables that contains the user credentials to access Twitter API 
 import credentials
