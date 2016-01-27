@@ -5,10 +5,15 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import re # Regular Expression
 from matplotlib import rcParams
+from datetime import datetime
+
+## DateTime: http://stackoverflow.com/questions/415511/how-to-get-current-time-in-python
 
 ## Use system to parse command line arguments
 print 'Number of arguments:', len(sys.argv), 'arguments.'
 print 'Argument List:', str(sys.argv)
+## Current Date Time
+current_datetime = datetime.now()
 
 # Path to image output directory
 input_directory = '/var/www/html/content/data/'
@@ -53,7 +58,7 @@ ax.set_ylabel('Number of tweets', fontsize=15)
 ax.set_title('Top 5 Languages', fontsize=15, fontweight='bold')
 tweets_by_lang[:5].plot(ax=ax, kind='bar', color='red')
 
-fig.savefig(output_directory + 'top-5-languageszz.png')
+fig.savefig(output_directory + 'top-5-languages-' + str(current_datetime) + '.png')
 
 ## Chart for top 5 countries
 tweets_by_country = tweets['country'].value_counts()
@@ -66,7 +71,7 @@ ax.set_ylabel('Number of tweets', fontsize=15)
 ax.set_title('Top 5 Countries', fontsize=15, fontweight='bold')
 tweets_by_country[:5].plot(ax=ax, kind='bar', color='blue')
 
-fig.savefig(output_directory + 'top-5-countrieszz.png')
+fig.savefig(output_directory + 'top-5-countries-' + str(current_datetime) + '.png')
 
 # Returns true if "word" is in "text"
 def word_in_text(word, text):
