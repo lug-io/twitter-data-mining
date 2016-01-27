@@ -11,6 +11,8 @@ consumer_secret     = credentials.twitter['consumerSecret']
 access_token        = credentials.twitter['accessToken']
 access_token_secret = credentials.twitter['accessTokenSecret']
 
+base_directory    = '/var/www/html/data/'
+
 
 #This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
@@ -24,6 +26,8 @@ class StdOutListener(StreamListener):
 
 
 if __name__ == '__main__':
+
+    output_directory = base_directory + datetime.now().strftime('%Y/%m/%d/')
 
     #This handles Twitter authetification and the connection to Twitter Streaming API
     l = StdOutListener()
