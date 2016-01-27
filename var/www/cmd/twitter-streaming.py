@@ -22,6 +22,11 @@ class StdOutListener(StreamListener):
     def __init__(self, filepath):
         self.output_directory = filepath
         os.system("mkdir -p %s"%(filepath))
+
+        d = datetime.now()
+        self.filename = d.strftime("%H.txt")
+        self.fh = open(self.output_directory + self.filename, "a")
+
     def on_data(self, data):
         print data
         return True
