@@ -47,6 +47,7 @@ These instructions are for a Digital Ocean droplet running Ubuntu 14.04.
 - `sudo crontab -e`
 	- Access root's cron list
 	- Make sure target scripts are chmod +x for execution
+- [Backing up and storing crontab](http://askubuntu.com/questions/216692/where-is-the-user-crontab-stored)
 
 
 ### Hosted Server (Docker)
