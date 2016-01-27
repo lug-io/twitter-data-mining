@@ -44,10 +44,11 @@ with open(tweets_data_path) as f:
 	for i, line in enumerate(f):
 		if i % 1000 == 0:
 			print "line check: ", str(i)
+		line = line.strip() # removes trailing/starting whitespace
+		# skipping empty lines
+		if not len(line):
+			continue
 		try:
-			## Skip "newline" entries
-			if i % 2 == 1:
-				continue
 			## Load tweets into array
 			tweet = json.loads(line)
 			tweet = mapToTweet(tweet)
