@@ -53,10 +53,13 @@ with open(tweets_data_path) as f:
 			tweet = json.loads(line)
 			tweet = mapToTweet(tweet)
 			tweets_data.append(tweet)
+		except MemoryError as e:
+			print "Run out of memory, bye."
+			raise e
 		except Exception as e:
 			print e
 			continue
-			
+
 ## Total # of tweets captured
 print "decoded tweets: ", len(tweets_data)
 
