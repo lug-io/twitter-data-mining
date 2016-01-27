@@ -25,7 +25,8 @@ rcParams.update({'figure.autolayout': True})
 #plt.gca().tight_layout() # gca -> GetCurrentAxis
 
 # Set target file
-tweets_data_path = input_directory + '1-24-2016.txt'
+tweets_data_path = input_directory + '20160126.txt'
+print tweets_data_path
 
 tweets_data = []
 tweets_file = open(tweets_data_path, "r")
