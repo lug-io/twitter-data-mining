@@ -30,17 +30,25 @@ rcParams.update({'figure.autolayout': True})
 tweets_data_path = input_directory + '20160126.txt'
 print tweets_data_path
 
-tweets_data = []
-tweets_file = open(tweets_data_path, "r")
-for line in tweets_file:
-	try:
-		tweet = json.loads(line)
-		tweets_data.append(tweet)
-	except:
-		continue
 
+tweets_data = []
+with open(tweets_data_path) as f:
+	for i, line in enumerate(f):
+		if i % 1000 == 0:
+			print "line check: ", str(i)
+		try:
+			## Skip "newline" entries
+			if i % 2 == 1:
+				continue
+			## Load tweets into array
+			tweet = json.loads(line)
+			tweets_data.append(tweet)
+		except Exception as e:
+			print e
+			continue
+			
 ## Total # of tweets captured
-print len(tweets_data)
+print "decoded tweets: ", len(tweets_data)
 
 ## New Panda DataFrame
 tweets = pd.DataFrame()
