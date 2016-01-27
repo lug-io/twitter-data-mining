@@ -10,8 +10,10 @@ from datetime import datetime
 ## DateTime: http://stackoverflow.com/questions/415511/how-to-get-current-time-in-python
 
 ## Use system to parse command line arguments
-print 'Number of arguments:', len(sys.argv), 'arguments.'
-print 'Argument List:', str(sys.argv)
+#print 'Number of arguments:', len(sys.argv), 'arguments.'
+#print 'Argument List:', str(sys.argv)
+#print str(sys.argv[1])
+
 ## Current Date Time
 current_datetime = datetime.now()
 
