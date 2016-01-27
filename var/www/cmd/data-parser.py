@@ -5,8 +5,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import re # Regular Expression
 from matplotlib import rcParams
+import traceback
 from datetime import datetime
 
+## Lambda, Reduce, Filter, Map: http://www.python-course.eu/lambda.php
 ## DateTime: http://stackoverflow.com/questions/415511/how-to-get-current-time-in-python
 
 ## Use system to parse command line arguments
