@@ -88,6 +88,8 @@ fig.savefig(output_directory + 'top-5-countries-' + str(current_datetime) + '.pn
 
 # Returns true if "word" is in "text"
 def word_in_text(word, text):
+	if text is None:
+		return False
 	word = word.lower()
 	text = text.lower()
 	match = re.search(word, text)
@@ -162,9 +164,10 @@ ax.set_xticks([p + 0.4 * width for p in x_pos])
 ax.set_xticklabels(prg_langs)
 plt.grid()
 
-## Extract links from tweets
-## http:// and https://
+## Extract links from tweets (http:// and https://)
 def extract_link(text):
+	if text is None:
+		return ''
 	regex = r'https?://[^\s<>"]+|www\.[^\s<>"]+'
 	match = re.search(regex, text)
 	if match:
