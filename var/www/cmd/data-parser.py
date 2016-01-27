@@ -11,7 +11,7 @@ from datetime import datetime
 # Lambda, Reduce, Filter, Map: http://www.python-course.eu/lambda.php
 # DateTime: http://stackoverflow.com/questions/415511/how-to-get-current-time-in-python
 # List Comprehension: http://stackoverflow.com/questions/16341775/what-is-the-advantage-of-a-list-comprehension-over-a-for-loop
-
+# Read in multiple files: http://stackoverflow.com/questions/208120/how-to-read-and-write-multiple-files
 
 ## Use system to parse command line arguments
 #print 'Number of arguments:', len(sys.argv), 'arguments.'
