@@ -19,13 +19,10 @@ base_directory    = '/var/www/html/content/data/'
 #This is a basic listener that just prints received tweets to stdout.
 class StdOutListener(StreamListener):
 
-    def __init__(self, filepath):
-        self.output_directory = filepath
-        os.system("mkdir -p %s"%(filepath))
-
-        d = datetime.now()
-        self.filename = d.strftime("%H.txt")
-        self.fh = open(self.output_directory + self.filename, "a")
+    def __init__(self, base_directory):
+        self.base_directory = base_directory
+        self.fh = None
+        self.__switch_active_file()
 
         self.tweetCount = 0
         self.errorCount = 0
@@ -49,13 +46,24 @@ class StdOutListener(StreamListener):
         print status
         self.errorCount += 1
 
+    # Determine directory, create it if it does not exist, close old file, create/open new file
+    def __switch_active_file(self):
+        d = datetime.now()
+        
+        self.current_hour = d.hour
+        self.output_directory = self.base_directory + d.strftime('%Y/%m/%d/')
+        os.system("mkdir -p %s"%(self.output_directory))
+
+        if self.fh is not None:
+            self.fh.close()
+        self.filename = d.strftime("%H.txt")
+        self.fh = open(self.output_directory + self.filename, "a")
+
 
 if __name__ == '__main__':
 
-    output_directory = base_directory + datetime.now().strftime('%Y/%m/%d/')
-
     #This handles Twitter authetification and the connection to Twitter Streaming API
-    l = StdOutListener(output_directory)
+    l = StdOutListener(base_directory)
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     stream = Stream(auth, l)
