@@ -1,12 +1,12 @@
 #!/usr/bin/python
+import re # Regular Expression
 import sys
 import json
+import traceback
 import pandas as pd
 import matplotlib.pyplot as plt
-import re # Regular Expression
-from matplotlib import rcParams
-import traceback
 from datetime import datetime
+from matplotlib import rcParams
 
 # Lambda, Reduce, Filter, Map: http://www.python-course.eu/lambda.php
 # DateTime: http://stackoverflow.com/questions/415511/how-to-get-current-time-in-python
@@ -31,8 +31,8 @@ rcParams.update({'figure.autolayout': True})
 #plt.gca().tight_layout() # gca -> GetCurrentAxis
 
 # Set target file
-tweets_data_path = input_directory + '20160126.txt'
-print tweets_data_path
+tweets_data_path = input_directory + '2016/01/28/01.txt'
+print(tweets_data_path)
 
 def mapToTweet(data):
 	newTweet = {}
@@ -42,7 +42,7 @@ def mapToTweet(data):
 	try:
 		tweet = json.loads(line)
 	except Exception as e:
-		print e
+		print(e)
 		return newTweet
 	newTweet['text'] = tweet.get('text', None)
 	newTweet['lang'] = tweet.get('lang', None)
@@ -56,7 +56,7 @@ with open(tweets_data_path) as f:
 					if len(line.strip())]
 
 ## Total # of tweets captured
-print "decoded tweets: ", len(tweets_data)
+print("decoded tweets: " + str(len(tweets_data)))
 
 ## New Panda DataFrame
 tweets = pd.DataFrame()
@@ -66,7 +66,6 @@ tweets = pd.DataFrame()
 tweets['text'] 		= map(lambda tweet: tweet.get('text', None), tweets_data)
 tweets['lang'] 		= map(lambda tweet: tweet.get('lang', None), tweets_data)
 tweets['country']   = map(lambda tweet: tweet.get('country', None), tweets_data)
-#tweets['country'] 	= map(lambda tweet: None if tweet.get('place', None) is None else tweet.get('place', {}).get('country'), tweets_data)
 
 ## Chart for top 5 languages
 tweets_by_lang = tweets['lang'].value_counts()
@@ -113,11 +112,11 @@ tweets['csharp']		= tweets['text'].apply(lambda tweet: word_in_text('csharp', tw
 tweets['fsharp']		= tweets['text'].apply(lambda tweet: word_in_text('fsharp', tweet))
 
 ## Calculate # of tweets for each language
-print tweets['python'].value_counts()[True]
-print tweets['javascript'].value_counts()[True]
-print tweets['ruby'].value_counts()[True]
-print tweets['csharp'].value_counts()[True]
-print tweets['fsharp'].value_counts()[True]
+print(tweets['python'].value_counts()[True])
+print(tweets['javascript'].value_counts()[True])
+print(tweets['ruby'].value_counts()[True])
+print(tweets['csharp'].value_counts()[True])
+print(tweets['fsharp'].value_counts()[True])
 
 ## Create a simple comparison chart
 prg_langs = ['python', 'javascript', 'ruby', 'csharp', 'fsharp']
@@ -146,16 +145,16 @@ tweets['tutorial']		= tweets['text'].apply(lambda tweet: word_in_text('tutorial'
 ##
 tweets['relevant']		= tweets['text'].apply(lambda tweet: word_in_text('programming', tweet) or word_in_text('tutorial', tweet))
 
-print tweets['programming'].value_counts()[True]
-print tweets['tutorial'].value_counts()[True]
-print tweets['relevant'].value_counts()[True]
+print(tweets['programming'].value_counts()[True])
+print(tweets['tutorial'].value_counts()[True])
+print(tweets['relevant'].value_counts()[True])
 
 ## Compare the popularity of the programming languages
-print tweets[tweets['relevant'] == True]['python'].value_counts()[True]
-print tweets[tweets['relevant'] == True]['javascript'].value_counts()[True]
-print tweets[tweets['relevant'] == True]['ruby'].value_counts()[True]
-print tweets[tweets['relevant'] == True]['csharp'].value_counts()[True]
-#print tweets[tweets['relevant'] == True]['fsharp'].value_counts()[True]
+print(tweets[tweets['relevant'] == True]['python'].value_counts()[True])
+print(tweets[tweets['relevant'] == True]['javascript'].value_counts()[True])
+print(tweets[tweets['relevant'] == True]['ruby'].value_counts()[True])
+print(tweets[tweets['relevant'] == True]['csharp'].value_counts()[True])
+print(tweets[tweets['relevant'] == True]['fsharp'].value_counts()[True])
 
 tweets_by_prg_lang = [tweets[tweets['relevant'] == True]['python'].value_counts()[True], 
                       tweets[tweets['relevant'] == True]['javascript'].value_counts()[True], 
@@ -190,11 +189,11 @@ tweets_relevant = tweets[tweets['relevant'] == True]
 tweets_relevant_with_link = tweets_relevant[tweets_relevant['link'] != '']
 
 ## Print links
-print tweets_relevant_with_link[tweets_relevant_with_link['python'] == True]['link']
-print tweets_relevant_with_link[tweets_relevant_with_link['javascript'] == True]['link']
-print tweets_relevant_with_link[tweets_relevant_with_link['ruby'] == True]['link']
-print tweets_relevant_with_link[tweets_relevant_with_link['csharp'] == True]['link']
-print tweets_relevant_with_link[tweets_relevant_with_link['fsharp'] == True]['link']
+print(tweets_relevant_with_link[tweets_relevant_with_link['python'] == True]['link'])
+print(tweets_relevant_with_link[tweets_relevant_with_link['javascript'] == True]['link'])
+print(tweets_relevant_with_link[tweets_relevant_with_link['ruby'] == True]['link'])
+print(tweets_relevant_with_link[tweets_relevant_with_link['csharp'] == True]['link'])
+print(tweets_relevant_with_link[tweets_relevant_with_link['fsharp'] == True]['link'])
 
 ## Show all of our grids ;)
 ##plt.show()	
