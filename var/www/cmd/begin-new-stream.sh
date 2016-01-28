@@ -20,17 +20,17 @@ screen -ls
 
 
 ## Build output location string
-echo -e "${GRN}~~ Build output location string${NC}"
-OUTPUTDIR="/var/www/html/content/data/"
-OUTPUTDATE=$(date +%Y%m%d)
-OUTPUTFILENAME="$OUTPUTDIR$OUTPUTDATE.txt"
-touch $OUTPUTFILENAME
-echo -e "${RED}$OUTPUTFILENAME${NC}"
+#echo -e "${GRN}~~ Build output location string${NC}"
+#OUTPUTDIR="/var/www/html/content/data/"
+#OUTPUTDATE=$(date +%Y%m%d)
+#OUTPUTFILENAME="$OUTPUTDIR$OUTPUTDATE.txt"
+#touch $OUTPUTFILENAME
+#echo -e "${RED}$OUTPUTFILENAME${NC}"
 
 
 ## Start screen
 echo -e "\n${GRN}~~ Start data-mining screen${NC}"
 screen -d -m -S data-miner
-screen -S data-miner -X stuff "python /var/www/cmd/twitter-streaming.py > $OUTPUTFILENAME"$(echo -ne '\015')
+screen -S data-miner -X stuff "python /var/www/cmd/twitter-streaming.py" # > $OUTPUTFILENAME"$(echo -ne '\015')
 screen -ls
 echo -e '\n'
