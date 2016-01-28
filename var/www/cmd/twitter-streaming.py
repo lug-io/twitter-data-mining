@@ -26,12 +26,13 @@ class StdOutListener(StreamListener):
 
         self.tweetCount = 0
         self.errorCount = 0
-        self.last = datetime.now()
 
     # Called for every new tweet on stream
     def on_data(self, data):
         self.fh.write(data)
         self.tweetCount += 1
+        if datetime.now().hour != self.current_hour:
+            self.__switch_active_file()
 
         return True
 
