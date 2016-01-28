@@ -13,7 +13,7 @@ consumer_secret     = credentials.twitter['consumerSecret']
 access_token        = credentials.twitter['accessToken']
 access_token_secret = credentials.twitter['accessTokenSecret']
 
-base_directory    = '/var/www/html/data/'
+base_directory    = '/var/www/html/content/data/'
 
 
 #This is a basic listener that just prints received tweets to stdout.
