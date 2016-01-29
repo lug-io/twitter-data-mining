@@ -31,10 +31,29 @@ Installing Python3 and the packages we want to use can be difficult. To ease tha
 	- [Conda Cheat Sheet](http://conda.pydata.org/docs/_downloads/conda-cheatsheet.pdf)
 	- [30 minute test drive](http://conda.pydata.org/docs/test-drive.html)
 
-- `conda install pip`
-- `conda install matplotlib`
-- `conda install pandas`
+**Install Packages:**
+
+These commands will only be available to your user. That means, any commands run with `sudo` will not be able to use these packages. Unfortunately, we're not leveraging Anaconda's environment features, but I recommend looking into them.
+
+- `conda install pip` [docs](https://pip.pypa.io/en/stable/) | [github](https://github.com/pypa/pip)
+- `conda install matplotlib` [docs](http://matplotlib.org/contents.html) | [github](https://github.com/matplotlib/matplotlib)
+- `conda install pandas` [docs](http://pandas.pydata.org/pandas-docs/stable/) | [github](https://github.com/pydata/pandas)
 - `pip install tweepy` [docs](http://tweepy.readthedocs.org/en/v3.5.0/getting_started.html) | [github](https://github.com/tweepy/tweepy)
+
+
+**Install Screen:**
+
+We'll be using 
+
+- `sudo apt-get install screen`
+	- [More about the screen command](http://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/)
+
+#### Basics of Running Scripts
+
+- `screen -S data-miner`
+- `python3 twitter-streaming.py`
+- `CTRL + a, d`
+	- Detach from active screen
 
 
 ### Local Machine ONLY Setup
