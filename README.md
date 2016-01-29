@@ -28,6 +28,8 @@ Installing Python3 and the packages we want to use can be difficult. To ease tha
 	- `yes` Accept the terms and conditions
 	- `yes` Add Anaconda to your system's PATH
 	- [For more info](http://conda.pydata.org/docs/install/full.html)
+	- [Conda Cheat Sheet](http://conda.pydata.org/docs/_downloads/conda-cheatsheet.pdf)
+	- [30 minute test drive](http://conda.pydata.org/docs/test-drive.html)
 
 - `conda install pip`
 - `conda install matplotlib`
