@@ -5,7 +5,9 @@
 
 There are quite a few steps here, but I wanted to provide as much information as I could to reproduce the hosted environment I'm using. If you run into issues, please feel free to message me. Also, a large number of these technologies have equivelants that they can be swapped out for.
 
-### Basic Server Setup
+### Basic Server Setup (Ubuntu)
+
+This setup uses Digital Ocean for hosting. You're welcome to explore other hosting options.
 
 - [Create a Droplet](https://cloud.digitalocean.com/droplets/new)
 	- Ubuntu 15.10 x64
@@ -75,7 +77,7 @@ We'll be using
 - [Backing up and storing crontab](http://askubuntu.com/questions/216692/where-is-the-user-crontab-stored)
 
 
-### Hosted Server (Docker)
+### Basic Server Setup (Docker)
 
 To come at a later date.
 
@@ -104,12 +106,6 @@ To come at a later date.
 	- Kill a screen session
 - `CTRL + a, d`
 	- Detach from active screen
-
-### Automating
-
-- Storing daily/weekly/monthly results in a database (and deleting old files)
-- Running daily/weekly/monthly reports on existing data
-- Accessing collected/stored data and reports via web requests
 
 ## Sources
 - [Data mining using twitter's streaming API](http://adilmoujahid.com/posts/2014/07/twitter-analytics/) by [Adil Moujahid](https://twitter.com/AdilMouja)
