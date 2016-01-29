@@ -1,0 +1,1 @@
+A single day's worth of tweets are included here as an example of what we're capturing
