@@ -1,10 +1,38 @@
 # Twitter Data Mining
 
-## About
+This project has two main functions. The first is to capture tweets from [Twitter's Streaming API](https://dev.twitter.com/streaming/overview) that include key terms we care about. The second is to apply text mining techniques to parse our captured tweets and derive insights that are relevenat, novel, and interesting. At a high level, here are the questions we're trying to answer and our results:
+
+**How do the popularities of programming languages compare?**
+
+[insert graphs here]
+
+**How do we identify the most useful/best hyperlinks for relevant programming resources?**
+
+[insert top article links here]
+
+**Which twitter users are the best evangelists for a given topic?**
+
+[insert twitter users and metrics that weigh them here]
+
 
 ### Why?
 
+Why not? This is a fun project that shows us how to collect data at the moment it's created. We have tons of it at our fingertips, and from it we can create value. This is also a great introduction to basic mining + refining concepts, and a good example of where Python shines.
+
+
 ### Folder Structure
+
+    .
+    ├── home
+    │     └── usr      				# home directory for our user
+	│        ├── app            	# project directory for our Python 3 scripts
+	│    	 ├── data          		# /yyyy/mm/dd/HH.txt for captured tweets
+	│    	 ├── anaconda3			# Install directory for Anaconda
+    ├── var
+    │	 └── www
+    │   	  └── html         		# Root directory for our MySQL/PHP website
+    └── ...
+
 
 
 ## Initial Setup
@@ -52,6 +80,7 @@ Installing Python3 and the packages we want to use can be difficult. To ease tha
 	- [For more info](http://conda.pydata.org/docs/install/full.html)
 	- [Conda Cheat Sheet](http://conda.pydata.org/docs/_downloads/conda-cheatsheet.pdf)
 	- [30 minute test drive](http://conda.pydata.org/docs/test-drive.html)
+- `sudo Anaconda3-2.4.1-Linux-x86_64.sh`
 
 **2. Install Packages:**
 
