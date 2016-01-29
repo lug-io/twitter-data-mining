@@ -1,40 +1,31 @@
 #!/usr/bin/python
+
+# Turn off visial settings (breaks on OS w/ no visuals)
+import matplotlib
+matplotlib.use('Agg')
+
+import os
 import re # Regular Expression
 import sys
 import json
 import traceback
 import pandas as pd
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
 from datetime import datetime
 from matplotlib import rcParams
 
-# Lambda, Reduce, Filter, Map: http://www.python-course.eu/lambda.php
-# DateTime: http://stackoverflow.com/questions/415511/how-to-get-current-time-in-python
-# List Comprehension: http://stackoverflow.com/questions/16341775/what-is-the-advantage-of-a-list-comprehension-over-a-for-loop
-# Read in multiple files: http://stackoverflow.com/questions/208120/how-to-read-and-write-multiple-files
-
-## Use system to parse command line arguments
-#print 'Number of arguments:', len(sys.argv), 'arguments.'
-#print 'Argument List:', str(sys.argv)
-#print str(sys.argv[1])
+# Set paths
+base_directory 		= os.environ['HOME']
+output_directory    = base_directory + '/output/'
+tweets_data_path	= base_directory + '/data/2016/01/29/14.txt'
 
 ## Current Date Time
 current_datetime = datetime.now()
 
-# Path to image output directory
-input_directory = '/var/www/html/content/data/'
-output_directory = '/var/www/html/content/graphs/'
-
 # Set matplot settings
 rcParams.update({'figure.autolayout': True})
-#plt.gcf().subplots_adjust(bottom=0.15) # gcf -> GetCurrentFigure
-#plt.gca().tight_layout() # gca -> GetCurrentAxis
 
-# Set target file
-tweets_data_path = input_directory + '2016/01/28/01.txt'
-print(tweets_data_path)
-
-def mapToTweet(data):
+def mapToTweet(line):
 	newTweet = {}
 	newTweet['text'] = None
 	newTweet['lang'] = None
@@ -97,6 +88,7 @@ fig.savefig(output_directory + 'top-5-countries-' + str(current_datetime) + '.pn
 def word_in_text(word, text):
 	if text is None:
 		return False
+	print(text)
 	word = word.lower()
 	text = text.lower()
 	match = re.search(word, text)
@@ -105,13 +97,15 @@ def word_in_text(word, text):
 	return False
 
 # Add columns to our tweets DataFrame
-tweets['python']     	= tweets['text'].apply(lambda tweet: word_in_text('python', tweet))
-tweets['javascript'] 	= tweets['text'].apply(lambda tweet: word_in_text('javascript', tweet))
-tweets['ruby']			= tweets['text'].apply(lambda tweet: word_in_text('ruby', tweet))
-tweets['csharp']		= tweets['text'].apply(lambda tweet: word_in_text('csharp', tweet))
-tweets['fsharp']		= tweets['text'].apply(lambda tweet: word_in_text('fsharp', tweet))
+tweets['python']     	= map(lambda tweet: words_in_text('python', tweet), tweets['text'])
+tweets['javascript'] 	= map(lambda tweet: words_in_text('javascript', tweet), tweets['text'])
+tweets['ruby']			= map(lambda tweet: words_in_text('ruby', tweet), tweets['text'])
+tweets['csharp']		= map(lambda tweet: words_in_text('csharp', tweet), tweets['text'])
+tweets['fsharp']		= map(lambda tweet: words_in_text('fsharp', tweet), tweets['text'])
 
 ## Calculate # of tweets for each language
+print(tweets['python'])
+print(tweets['python'].value_counts())
 print(tweets['python'].value_counts()[True])
 print(tweets['javascript'].value_counts()[True])
 print(tweets['ruby'].value_counts()[True])
@@ -137,6 +131,8 @@ ax.set_title('Ranking: python, vs. javascript vs. ruby vs. csharp vs. fsharp (Ra
 ax.set_xticks([p + 0.4 * width for p in x_pos])
 ax.set_xticklabels(prg_langs)
 plt.grid()
+
+fig.savefig(output_directory + 'raw-comparison-' + str(current_datetime) + '.png')
 
 ## Targeting relevant tweets
 tweets['programming'] 	= tweets['text'].apply(lambda tweet: word_in_text('programming', tweet))
@@ -171,6 +167,8 @@ ax.set_title('Ranking: python vs. javascript vs. ruby (Relevant data)', fontsize
 ax.set_xticks([p + 0.4 * width for p in x_pos])
 ax.set_xticklabels(prg_langs)
 plt.grid()
+
+fig.savefig(output_directory + 'relevant-comparison-' + str(current_datetime) + '.png')
 
 ## Extract links from tweets (http:// and https://)
 def extract_link(text):
