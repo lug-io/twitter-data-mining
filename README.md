@@ -1,11 +1,31 @@
 # Twitter Data Mining
 
+## About
+
+### Why?
+
+### Folder Structure
+
 
 ## Initial Setup
 
-There are quite a few steps here, but I wanted to provide as much information as I could to reproduce the hosted environment I'm using. If you run into issues, please feel free to message me. Also, a large number of these technologies have equivelants that they can be swapped out for.
+The below steps are a collection of resources that assist in getting an environment up and running. If you run into issues, please feel free to message me. Also, a large number of these technologies have equivelants that can be swapped out/in.
 
-### Basic Server Setup (Ubuntu)
+You can skip the steps below if you have an environment that has:
+
+- Python3
+- Tweepy
+- Pandas
+- Matplotlib
+- Screen
+
+
+### Option 1: Local Machine
+
+...
+
+
+### Option 2: VPS (Ubuntu)
 
 This setup uses Digital Ocean for hosting. You're welcome to explore other hosting options.
 
@@ -19,9 +39,9 @@ This setup uses Digital Ocean for hosting. You're welcome to explore other hosti
 - [Installing (and securing) PHPMyAdmin](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-12-04)
 
 
-### Specific to our Application
+#### Specific to our Application
 
-**Install Anaconda:**
+**1. Install Anaconda:**
 
 Installing Python3 and the packages we want to use can be difficult. To ease that burdern, we're going to install Anaconda. Anaconda is a cross-platform Python distribution for data analytics and scientific computing. It lowers the barrier for us to start, and is easy to install/uninstall.
 
@@ -33,38 +53,39 @@ Installing Python3 and the packages we want to use can be difficult. To ease tha
 	- [Conda Cheat Sheet](http://conda.pydata.org/docs/_downloads/conda-cheatsheet.pdf)
 	- [30 minute test drive](http://conda.pydata.org/docs/test-drive.html)
 
-**Install Packages:**
+**2. Install Packages:**
 
-These commands will only be available to your user. That means, any commands run with `sudo` will not be able to use these packages. Unfortunately, we're not leveraging Anaconda's environment features, but I recommend looking into them.
+These packages will only be available to your user. That means, any commands run with `sudo` will not be able to use these packages. Unfortunately, we're not leveraging Anaconda's environment features, but I recommend looking into them.
 
-- `conda install pip` [docs](https://pip.pypa.io/en/stable/) | [github](https://github.com/pypa/pip)
-- `conda install matplotlib` [docs](http://matplotlib.org/contents.html) | [github](https://github.com/matplotlib/matplotlib)
-- `conda install pandas` [docs](http://pandas.pydata.org/pandas-docs/stable/) | [github](https://github.com/pydata/pandas)
-- `pip install tweepy` [docs](http://tweepy.readthedocs.org/en/v3.5.0/getting_started.html) | [github](https://github.com/tweepy/tweepy)
+- `conda install pip`
+	- [docs](https://pip.pypa.io/en/stable/) | [github](https://github.com/pypa/pip)
+- `conda install matplotlib`
+	- [docs](http://matplotlib.org/contents.html) | [github](https://github.com/matplotlib/matplotlib)
+- `conda install pandas`
+	- [docs](http://pandas.pydata.org/pandas-docs/stable/) | [github](https://github.com/pydata/pandas)
+- `pip install tweepy`
+	- [docs](http://tweepy.readthedocs.org/en/v3.5.0/getting_started.html) | [github](https://github.com/tweepy/tweepy)
 
 
-**Install Screen:**
+**3. Install Screen:**
 
-We'll be using 
+Screen allows us to run programs in the background without tying up our main console/terminal.
 
 - `sudo apt-get install screen`
 	- [More about the screen command](http://www.tecmint.com/screen-command-examples-to-manage-linux-terminals/)
 
-#### Basics of Running Scripts
+
+### Option 3: VPS (Docker)
+
+...
+
+
+## The Basics
 
 - `screen -S data-miner`
 - `python3 twitter-streaming.py`
 - `CTRL + a, d`
 	- Detach from active screen
-
-
-### Local Machine ONLY Setup
-
-...
-
-
-
-## STUFF
 
 - `sudo nano /var/mail/root`
 	- Shows emails from CRON to `root` user
@@ -75,23 +96,6 @@ We'll be using
 	- Access root's cron list
 	- Make sure target scripts are chmod +x for execution
 - [Backing up and storing crontab](http://askubuntu.com/questions/216692/where-is-the-user-crontab-stored)
-
-
-### Basic Server Setup (Docker)
-
-To come at a later date.
-
-
-## Executing Code Examples/HowTo
-
-### The Basics
-
-- `python twitter-streaming.py > output.txt`
-	- Pipe twitter data to an output file
-- `python data-parser.py`
-	- Uses output.txt to generate relevant charts in root folder
-
-	sudo sh -c 'python twitter-streaming.py > /var/www/html/content/data/1-24-2016.txt'
 
 
 ### Running Data Mining in the Background
