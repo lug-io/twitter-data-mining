@@ -27,7 +27,7 @@ Why not? This is a fun project that shows us how to collect data at the moment i
     │     └── usr 					# home directory for our user
 	│		   ├── app 				# project directory for our Python 3 scripts
 	│		   ├── data 			# /yyyy/mm/dd/HH.txt for captured tweets
-	│		   ├── anaconda3		# Install directory for Anaconda
+	│		   └── anaconda3		# Install directory for Anaconda
     ├── var
     │	 └── www
     │   	  └── html         		# Root directory for our MySQL/PHP website
