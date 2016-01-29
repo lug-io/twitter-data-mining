@@ -81,6 +81,7 @@ Installing Python3 and the packages we want to use can be difficult. To ease tha
 	- [Conda Cheat Sheet](http://conda.pydata.org/docs/_downloads/conda-cheatsheet.pdf)
 	- [30 minute test drive](http://conda.pydata.org/docs/test-drive.html)
 - `sudo Anaconda3-2.4.1-Linux-x86_64.sh`
+- `sudo apt-get install python-qt4`
 
 **2. Install Packages:**
 
