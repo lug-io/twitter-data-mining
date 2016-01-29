@@ -13,7 +13,7 @@ consumer_secret     = credentials.twitter['consumerSecret']
 access_token        = credentials.twitter['accessToken']
 access_token_secret = credentials.twitter['accessTokenSecret']
 
-base_directory    = '/var/www/html/content/data/'
+base_directory    = os.environ['HOME'] + '/data/'
 
 
 #This is a basic listener that just prints received tweets to stdout.
@@ -44,13 +44,13 @@ class StdOutListener(StreamListener):
             pass
 
     def on_error(self, status):
-        print status
+        print(status)
         self.errorCount += 1
 
     # Determine directory, create it if it does not exist, close old file, create/open new file
     def __switch_active_file(self):
         d = datetime.now()
-        
+
         self.current_hour = d.hour
         self.output_directory = self.base_directory + d.strftime('%Y/%m/%d/')
         os.system("mkdir -p %s"%(self.output_directory))
