@@ -150,11 +150,12 @@ print(tweets['tutorial'].value_counts()[True])
 print(tweets['relevant'].value_counts()[True])
 
 ## Compare the popularity of the programming languages
+print("Relevant Counts:")
 print(tweets[tweets['relevant'] == True]['python'].value_counts()[True])
 print(tweets[tweets['relevant'] == True]['javascript'].value_counts()[True])
 print(tweets[tweets['relevant'] == True]['ruby'].value_counts()[True])
-print(tweets[tweets['relevant'] == True]['csharp'].value_counts()[True])
-print(tweets[tweets['relevant'] == True]['fsharp'].value_counts()[True])
+print("C# Count: " + str(tweets[tweets['relevant'] == True]['csharp'].value_counts()[True]))
+print("F# Count: " + str(tweets[tweets['relevant'] == True]['fsharp'].value_counts()[True]))
 
 tweets_by_prg_lang = [tweets[tweets['relevant'] == True]['python'].value_counts()[True], 
                       tweets[tweets['relevant'] == True]['javascript'].value_counts()[True], 
